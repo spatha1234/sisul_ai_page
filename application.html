@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI협력업체 지원 양식 - 서울시설공단</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .application-container {
+            max-width: 900px;
+            margin: 120px auto 50px;
+            padding: 0 2rem;
+        }
+
+        .application-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .application-header h1 {
+            font-size: 2.5rem;
+            color: #0082C9;
+            margin-bottom: 1rem;
+        }
+
+        .application-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .form-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .form-section h2 {
+            font-size: 1.5rem;
+            color: #0082C9;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #0082C9;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .form-group label.required::after {
+            content: ' *';
+            color: #e74c3c;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="number"],
+        .form-group input[type="date"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0082C9;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checkbox-item label {
+            font-weight: normal;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-label {
+            display: block;
+            padding: 1rem;
+            background: #f8f9fa;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload-label:hover {
+            background: #e9ecef;
+            border-color: #0082C9;
+        }
+
+        .file-list {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .submit-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #0082C9);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 130, 201, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #0082C9;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-box p {
+            margin: 0;
+            color: #004085;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .application-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* 성공 팝업 모달 */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .success-modal.show {
+            display: flex;
+        }
+
+        .success-modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-modal-content h3 {
+            font-size: 1.8rem;
+            color: #0082C9;
+            margin-bottom: 1rem;
+        }
+
+        .success-modal-content p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .success-modal-button {
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, #667eea, #0082C9);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .success-modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 130, 201, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="https://www.sisul.or.kr" target="_blank" rel="noopener noreferrer">
+                    <img src="logo.png" alt="서울시설공단">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html#overview">모집개요</a></li>
+                <li><a href="index.html#qualifications">지원자격</a></li>
+                <li><a href="index.html#process">지원절차</a></li>
+                <li><a href="index.html#contact">문의처</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="application-container">
+        <div class="application-header">
+            <h1>AI협력업체 지원 양식</h1>
+            <p>서울시설공단 AI협력업체 모집에 지원해주셔서 감사합니다</p>
+        </div>
+
+        <form id="applicationForm">
+            <!-- 기본 정보 -->
+            <div class="form-section">
+                <h2>기본 정보</h2>
+                <div class="info-box">
+                    <p>모든 필수 항목(*)은 반드시 입력해주세요.</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="required">회사명</label>
+                    <input type="text" name="companyName" required placeholder="회사명을 입력하세요">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="required">대표자명</label>
+                        <input type="text" name="representative" required placeholder="대표자명을 입력하세요">
+                    </div>
+                    <div class="form-group">
+                        <label class="required">사업자등록번호</label>
+                        <input type="text" name="businessNumber" required placeholder="000-00-00000" pattern="[0-9]{3}-[0-9]{2}-[0-9]{5}">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="required">담당자명</label>
+                        <input type="text" name="contactPerson" required placeholder="담당자명을 입력하세요">
+                    </div>
+                    <div class="form-group">
+                        <label class="required">담당자 직책</label>
+                        <input type="text" name="position" required placeholder="예: 대표이사, 상무 등">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="required">전화번호</label>
+                        <input type="tel" name="phone" required placeholder="02-0000-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}">
+                    </div>
+                    <div class="form-group">
+                        <label class="required">이메일</label>
+                        <input type="email" name="email" required placeholder="example@company.com">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="required">회사 주소</label>
+                    <input type="text" name="address" required placeholder="회사 주소를 입력하세요">
+                </div>
+
+                <div class="form-group">
+                    <label>회사 홈페이지</label>
+                    <input type="text" name="website" placeholder="https://www.example.com">
+                </div>
+            </div>
+
+            <!-- 협력 분야 -->
+            <div class="form-section">
+                <h2>협력 분야</h2>
+                <div class="form-group">
+                    <label class="required">주요 협력 분야</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="cooperationField" value="ai-facility" id="field1">
+                            <label for="field1">AI 기반 시설 관리</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="cooperationField" value="smart-city" id="field2">
+                            <label for="field2">스마트 시티 솔루션</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="cooperationField" value="data-analysis" id="field3">
+                            <label for="field3">데이터 분석</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="cooperationField" value="predictive-maintenance" id="field4">
+                            <label for="field4">예측 유지보수</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="cooperationField" value="automation" id="field5">
+                            <label for="field5">자동화 시스템</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="cooperationField" value="other" id="field6">
+                            <label for="field6">기타</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>기타 협력 분야 상세</label>
+                    <textarea name="cooperationDetail" placeholder="기타 협력 분야가 있으시면 상세히 입력해주세요"></textarea>
+                </div>
+            </div>
+
+            <!-- 회사 소개 -->
+            <div class="form-section">
+                <h2>회사 소개</h2>
+                <div class="form-group">
+                    <label class="required">회사 개요</label>
+                    <textarea name="companyOverview" required placeholder="회사의 설립 목적, 주요 사업 분야, 비전 등을 입력하세요"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="required">주요 기술 및 서비스</label>
+                    <textarea name="technology" required placeholder="보유하고 있는 AI 기술, 서비스, 솔루션 등을 상세히 입력하세요"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="required">주요 실적</label>
+                    <textarea name="achievements" required placeholder="과거 수행한 프로젝트, 주요 고객사, 성과 등을 입력하세요"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>특허 및 지적재산권</label>
+                    <textarea name="patents" placeholder="보유한 특허, 저작권, 상표권 등을 입력하세요"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>인증 및 품질 관리</label>
+                    <textarea name="certifications" placeholder="보유한 인증서, 품질 관리 체계 등을 입력하세요"></textarea>
+                </div>
+            </div>
+
+            <!-- 첨부 파일 -->
+            <div class="form-section">
+                <h2>첨부 파일</h2>
+                <div class="info-box">
+                    <p>파일은 각각 10MB 이하로 업로드해주세요. (지원 형식: PDF, DOC, DOCX, JPG, PNG)</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="required">사업자등록증</label>
+                    <div class="file-upload">
+                        <input type="file" name="businessLicense" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
+                        <label for="businessLicense" class="file-upload-label">
+                            📎 파일 선택 (필수)
+                        </label>
+                    </div>
+                    <div class="file-list" id="fileList1"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="required">회사소개서</label>
+                    <div class="file-upload">
+                        <input type="file" name="companyProfile" accept=".pdf,.doc,.docx" required>
+                        <label for="companyProfile" class="file-upload-label">
+                            📎 파일 선택 (필수)
+                        </label>
+                    </div>
+                    <div class="file-list" id="fileList2"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>기술보유 증빙자료</label>
+                    <div class="file-upload">
+                        <input type="file" name="technologyProof" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                        <label for="technologyProof" class="file-upload-label">
+                            📎 파일 선택 (선택)
+                        </label>
+                    </div>
+                    <div class="file-list" id="fileList3"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>기타 첨부 자료</label>
+                    <div class="file-upload">
+                        <input type="file" name="otherFiles" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" multiple>
+                        <label for="otherFiles" class="file-upload-label">
+                            📎 파일 선택 (선택, 여러 개 가능)
+                        </label>
+                    </div>
+                    <div class="file-list" id="fileList4"></div>
+                </div>
+            </div>
+
+            <!-- 제출 버튼 -->
+            <div class="submit-buttons">
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='index.html'">취소</button>
+                <button type="submit" class="btn btn-primary">지원서 제출</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- 성공 팝업 모달 -->
+    <div id="successModal" class="success-modal">
+        <div class="success-modal-content">
+            <div class="success-icon">✅</div>
+            <h3>제출 완료!</h3>
+            <p>지원서가 성공적으로 제출되었습니다.<br>검토 후 연락드리겠습니다.</p>
+            <button class="success-modal-button" onclick="closeSuccessModal()">확인</button>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer>
+        <p>&copy; 2026 서울시설공단. All rights reserved.</p>
+        <p>서울시설공단과 함께 더 나은 미래를 만들어갑니다.</p>
+    </footer>
+
+    <!-- Supabase 클라이언트 라이브러리 -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <script>
+        // DOM이 로드된 후 실행
+        document.addEventListener('DOMContentLoaded', function() {
+            // Supabase 클라이언트 초기화
+            const SUPABASE_URL = 'https://rqewmdskqkqvczjwznwm.supabase.co';
+            const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJxZXdtZHNrcWtxdmN6and6bndtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk0MDgwNDIsImV4cCI6MjA4NDk4NDA0Mn0.ot8b0gU9eBNE6bAKwRIs9cL-ngAqXTZ5Xo0Pe1a_iCE';
+            
+            if (typeof window.supabase === 'undefined') {
+                console.error('Supabase 클라이언트를 로드할 수 없습니다.');
+                alert('Supabase 클라이언트를 로드할 수 없습니다. 페이지를 새로고침해주세요.');
+                return;
+            }
+            
+            const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            const STORAGE_BUCKET = 'applications'; // Storage 버킷 이름
+
+            // 성공 모달 표시 함수 (전역으로 설정)
+            window.showSuccessModal = function() {
+                const modal = document.getElementById('successModal');
+                if (modal) {
+                    modal.classList.add('show');
+                }
+            };
+
+            // 성공 모달 닫기 함수 (전역으로 설정)
+            window.closeSuccessModal = function() {
+                const modal = document.getElementById('successModal');
+                if (modal) {
+                    modal.classList.remove('show');
+                }
+            };
+
+            // 모달 외부 클릭 시 닫기
+            const successModal = document.getElementById('successModal');
+            if (successModal) {
+                successModal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        window.closeSuccessModal();
+                    }
+                });
+            }
+
+        // 파일 선택 시 파일명 표시
+        document.querySelectorAll('input[type="file"]').forEach((input, index) => {
+            input.addEventListener('change', function(e) {
+                const fileList = document.getElementById(`fileList${index + 1}`);
+                if (this.files && this.files.length > 0) {
+                    let fileNames = [];
+                    for (let i = 0; i < this.files.length; i++) {
+                        const fileSize = (this.files[i].size / 1024 / 1024).toFixed(2);
+                        fileNames.push(`${this.files[i].name} (${fileSize}MB)`);
+                    }
+                    fileList.innerHTML = fileNames.join('<br>');
+                } else {
+                    fileList.innerHTML = '';
+                }
+            });
+        });
+
+        // 파일을 Supabase Storage에 업로드
+        async function uploadFile(file, applicationId, fileType) {
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${applicationId}/${fileType}_${Date.now()}.${fileExt}`;
+            const filePath = `${fileName}`;
+
+            const { data, error } = await supabase.storage
+                .from(STORAGE_BUCKET)
+                .upload(filePath, file, {
+                    cacheControl: '3600',
+                    upsert: false
+                });
+
+            if (error) {
+                console.error('파일 업로드 오류:', error);
+                throw error;
+            }
+
+            // 파일 정보를 데이터베이스에 저장
+            const { data: fileData, error: dbError } = await supabase
+                .from('application_files')
+                .insert({
+                    application_id: applicationId,
+                    file_type: fileType,
+                    file_name: file.name,
+                    file_path: filePath,
+                    file_size: file.size,
+                    mime_type: file.type
+                });
+
+            if (dbError) {
+                console.error('파일 정보 저장 오류:', dbError);
+                throw dbError;
+            }
+
+            return filePath;
+        }
+
+        // 폼 제출 처리
+        const form = document.getElementById('applicationForm');
+        if (!form) {
+            console.error('폼을 찾을 수 없습니다.');
+        }
+        
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // 협력 분야 체크 확인
+            const cooperationFields = document.querySelectorAll('input[name="cooperationField"]:checked');
+            if (cooperationFields.length === 0) {
+                alert('주요 협력 분야를 최소 1개 이상 선택해주세요.');
+                return;
+            }
+
+            // 파일 크기 확인
+            const fileInputs = document.querySelectorAll('input[type="file"]');
+            let hasError = false;
+            fileInputs.forEach(input => {
+                if (input.files && input.files.length > 0) {
+                    for (let i = 0; i < input.files.length; i++) {
+                        const fileSize = input.files[i].size / 1024 / 1024; // MB
+                        if (fileSize > 10) {
+                            alert(`${input.files[i].name} 파일이 10MB를 초과합니다.`);
+                            hasError = true;
+                        }
+                    }
+                }
+            });
+
+            if (hasError) return;
+
+            // 제출 확인
+            if (!confirm('지원서를 제출하시겠습니까?\n제출 후에는 수정이 불가능합니다.')) {
+                return;
+            }
+
+            // 제출 버튼 비활성화 및 로딩 표시
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.textContent = '제출 중...';
+
+            try {
+                // 폼 데이터 수집
+                const formData = new FormData(this);
+                const cooperationFieldValues = Array.from(cooperationFields).map(field => field.value);
+
+                // 지원서 데이터 준비
+                const applicationData = {
+                    company_name: formData.get('companyName'),
+                    representative: formData.get('representative'),
+                    business_number: formData.get('businessNumber'),
+                    contact_person: formData.get('contactPerson'),
+                    position: formData.get('position'),
+                    phone: formData.get('phone'),
+                    email: formData.get('email'),
+                    address: formData.get('address'),
+                    website: formData.get('website') || null,
+                    cooperation_fields: cooperationFieldValues,
+                    cooperation_detail: formData.get('cooperationDetail') || null,
+                    company_overview: formData.get('companyOverview'),
+                    technology: formData.get('technology'),
+                    achievements: formData.get('achievements'),
+                    patents: formData.get('patents') || null,
+                    certifications: formData.get('certifications') || null
+                };
+
+                // 1. 지원서 정보를 데이터베이스에 저장
+                const { data: application, error: appError } = await supabase
+                    .from('applications')
+                    .insert(applicationData)
+                    .select()
+                    .single();
+
+                if (appError) {
+                    console.error('지원서 저장 오류:', appError);
+                    throw new Error('지원서 저장에 실패했습니다: ' + appError.message);
+                }
+
+                const applicationId = application.id;
+
+                // 2. 파일 업로드
+                const fileUploadPromises = [];
+
+                // 사업자등록증
+                const businessLicense = formData.get('businessLicense');
+                if (businessLicense && businessLicense.size > 0) {
+                    fileUploadPromises.push(uploadFile(businessLicense, applicationId, 'businessLicense'));
+                }
+
+                // 회사소개서
+                const companyProfile = formData.get('companyProfile');
+                if (companyProfile && companyProfile.size > 0) {
+                    fileUploadPromises.push(uploadFile(companyProfile, applicationId, 'companyProfile'));
+                }
+
+                // 기술보유 증빙자료
+                const technologyProof = formData.get('technologyProof');
+                if (technologyProof && technologyProof.size > 0) {
+                    fileUploadPromises.push(uploadFile(technologyProof, applicationId, 'technologyProof'));
+                }
+
+                // 기타 첨부 자료 (여러 개 가능)
+                const otherFiles = formData.getAll('otherFiles');
+                otherFiles.forEach(file => {
+                    if (file && file.size > 0) {
+                        fileUploadPromises.push(uploadFile(file, applicationId, 'otherFiles'));
+                    }
+                });
+
+                // 모든 파일 업로드 대기
+                await Promise.all(fileUploadPromises);
+
+                // 폼 리셋
+                this.reset();
+                document.querySelectorAll('.file-list').forEach(el => el.innerHTML = '');
+
+                // 성공 팝업 표시
+                window.showSuccessModal();
+
+            } catch (error) {
+                console.error('제출 오류:', error);
+                alert('제출 중 오류가 발생했습니다: ' + error.message + '\n\n다시 시도해주세요.');
+            } finally {
+                // 제출 버튼 다시 활성화
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+            }
+        });
+        }); // DOMContentLoaded 종료
+    </script>
+</body>
+</html>
