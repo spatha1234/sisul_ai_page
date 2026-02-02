@@ -31,17 +31,12 @@ document.querySelectorAll('.fade-in').forEach(el => {
 });
 
 // 헤더 스크롤 효과
-let lastScroll = 0;
 const header = document.querySelector('header');
-
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 100) {
-        header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
-    } else {
-        header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-    }
-    
-    lastScroll = currentScroll;
-});
+if (header) {
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        header.style.boxShadow = currentScroll > 100
+            ? '0 2px 20px rgba(0, 0, 0, 0.15)'
+            : '0 2px 10px rgba(0, 0, 0, 0.1)';
+    });
+}

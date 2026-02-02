@@ -6,345 +6,8 @@
     <title>AI협력업체 지원 양식 - 서울시설공단</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            background-color: #ffffff;
-        }
-        .application-container {
-            max-width: 900px;
-            margin: 120px auto 50px;
-            padding: 0 2rem;
-        }
-
-        .application-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .application-header h1 {
-            font-size: 2.5rem;
-            color: #0082C9;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-
-        .application-header p {
-            color: #666;
-            font-size: 1.1rem;
-        }
-
-        .form-section {
-            background:white;
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-        }
-
-        .form-section h2 {
-            font-size: 1.5rem;
-            color: #0082C9;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #0082C9;
-            font-weight: 600;
-            letter-spacing: -0.01em;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-        }
-
-        .form-group label.required::after {
-            content: ' *';
-            color: #e74c3c;
-        }
-
-        .form-group input[type="text"],
-        .form-group input[type="email"],
-        .form-group input[type="tel"],
-        .form-group input[type="number"],
-        .form-group input[type="date"],
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #0082C9;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 0.5rem;
-        }
-
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .checkbox-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-        }
-
-        .checkbox-item label {
-            font-weight: normal;
-            margin: 0;
-            cursor: pointer;
-        }
-
-        .file-upload {
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
-
-        .file-upload input[type="file"] {
-            position: absolute;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-        }
-
-        .file-upload-label {
-            display: block;
-            padding: 1rem;
-            background: #f8f9fa;
-            border: 2px dashed #ccc;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .file-upload-label:hover {
-            background: #e9ecef;
-            border-color: #0082C9;
-        }
-
-        .file-list {
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        .submit-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #0066B3, #0082C9);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 130, 201, 0.3);
-        }
-
-        .btn-secondary {
-            background: #6c757d;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #5a6268;
-        }
-
-        .info-box {
-            background: #e7f3ff;
-            border-left: 4px solid #0082C9;
-            padding: 1rem;
-            border-radius: 5px;
-            margin-bottom: 1.5rem;
-        }
-
-        .info-box p {
-            margin: 0;
-            color: #004085;
-            font-size: 0.95rem;
-        }
-
-        @media (max-width: 768px) {
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .application-header h1 {
-                font-size: 2rem;
-            }
-        }
-
-        /* 성공 팝업 모달 */
-        .success-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .success-modal.show {
-            display: flex;
-        }
-
-        .success-modal-content {
-            background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            animation: modalFadeIn 0.3s ease;
-        }
-
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .success-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .success-modal-content h3 {
-            font-size: 1.8rem;
-            color: #0082C9;
-            margin-bottom: 1rem;
-            font-weight: 600;
-            letter-spacing: -0.01em;
-        }
-
-        .success-modal-content p {
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .success-modal-button {
-            padding: 0.75rem 2rem;
-            background: linear-gradient(135deg, #0066B3, #0082C9);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .success-modal-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 130, 201, 0.3);
-        }
-        /* 개인정보 동의 팝업 */
-        .agree-modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 10001;
-            align-items: center;
-            justify-content: center;
-        }
-        .agree-modal-overlay.show { display: flex; }
-        .agree-modal {
-            background: #fff;
-            max-width: 560px;
-            width: 92%;
-            max-height: 90vh;
-            overflow-y: auto;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            padding: 2rem;
-        }
-        .agree-modal h2 { font-size: 1.35rem; color: #0082C9; margin-bottom: 1.25rem; line-height: 1.4; }
-        .agree-modal .agree-body { font-size: 0.95rem; line-height: 1.7; color: #333; margin-bottom: 1.5rem; }
-        .agree-modal .agree-body p { margin-bottom: 0.5rem; line-height: 1.6; }
-        .agree-modal .agree-body strong { font-weight: 600; }
-        .agree-modal .agree-body .agree-item { margin-bottom: 1rem; }
-        .agree-checkbox-wrap { display: flex; align-items: center; gap: 1.5rem; margin: 1.25rem 0; flex-wrap: wrap; }
-        .agree-checkbox-wrap label { display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 500; color: #333; }
-        .agree-checkbox-wrap input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
-        .agree-modal-buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 1.5rem; }
-        .agree-modal-buttons button {
-            padding: 10px 24px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s;
-        }
-        .agree-btn-cancel { background: #e9ecef; color: #333; }
-        .agree-btn-confirm { background: #0082C9; color: #fff; }
-        .agree-btn-confirm:hover { background: #0066B3; }
-    </style>
 </head>
-<body>
+<body class="page-application">
     <!-- 헤더 -->
     <header>
         <nav>
@@ -383,12 +46,12 @@
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="required">대표자명</label>
-                        <input type="text" name="representative" required placeholder="대표자명을 입력하세요">
+                        <label>대표자명</label>
+                        <input type="text" name="representative" placeholder="대표자명을 입력하세요">
                     </div>
                     <div class="form-group">
                         <label class="required">사업자등록번호</label>
-                        <input type="text" name="businessNumber" required placeholder="000-00-00000" pattern="[0-9]{3}-[0-9]{2}-[0-9]{5}">
+                        <input type="text" name="businessNumber" required placeholder="사업자등록번호를 입력하세요">
                     </div>
                 </div>
 
@@ -398,25 +61,20 @@
                         <input type="text" name="contactPerson" required placeholder="담당자명을 입력하세요">
                     </div>
                     <div class="form-group">
-                        <label class="required">담당자 직책</label>
-                        <input type="text" name="position" required placeholder="예: 대표이사, 상무 등">
+                        <label>담당자 직책</label>
+                        <input type="text" name="position" placeholder="예: 대표이사, 상무 등">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label class="required">전화번호</label>
-                        <input type="tel" name="phone" required placeholder="02-0000-0000" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}">
+                        <input type="tel" name="phone" required placeholder="전화번호를 입력하세요">
                     </div>
                     <div class="form-group">
                         <label class="required">이메일</label>
                         <input type="email" name="email" required placeholder="example@company.com">
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="required">회사 주소</label>
-                    <input type="text" name="address" required placeholder="회사 주소를 입력하세요">
                 </div>
 
                 <div class="form-group">
@@ -444,23 +102,19 @@
                             <label for="field3">데이터 분석</label>
                         </div>
                         <div class="checkbox-item">
-                            <input type="checkbox" name="cooperationField" value="predictive-maintenance" id="field4">
-                            <label for="field4">예측 유지보수</label>
+                            <input type="checkbox" name="cooperationField" value="automation" id="field4">
+                            <label for="field4">자동화 시스템</label>
                         </div>
                         <div class="checkbox-item">
-                            <input type="checkbox" name="cooperationField" value="automation" id="field5">
-                            <label for="field5">자동화 시스템</label>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" name="cooperationField" value="other" id="field6">
-                            <label for="field6">기타</label>
+                            <input type="checkbox" name="cooperationField" value="other" id="field5">
+                            <label for="field5">기타</label>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>기타 협력 분야 상세</label>
-                    <textarea name="cooperationDetail" placeholder="기타 협력 분야가 있으시면 상세히 입력해주세요"></textarea>
+                    <textarea name="cooperationDetail" placeholder="기타 협력 분야가 있으시면 입력해주세요"></textarea>
                 </div>
             </div>
 
@@ -474,22 +128,7 @@
 
                 <div class="form-group">
                     <label class="required">주요 기술 및 서비스</label>
-                    <textarea name="technology" required placeholder="보유하고 있는 AI 기술, 서비스, 솔루션 등을 상세히 입력하세요"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label class="required">주요 실적</label>
-                    <textarea name="achievements" required placeholder="과거 수행한 프로젝트, 주요 고객사, 성과 등을 입력하세요"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label>특허 및 지적재산권</label>
-                    <textarea name="patents" placeholder="보유한 특허, 저작권, 상표권 등을 입력하세요"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label>인증 및 품질 관리</label>
-                    <textarea name="certifications" placeholder="보유한 인증서, 품질 관리 체계 등을 입력하세요"></textarea>
+                    <textarea name="technology" required placeholder="보유 AI 기술, 서비스, 솔루션, 실적 등을 입력하세요"></textarea>
                 </div>
             </div>
 
@@ -512,36 +151,25 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="required">회사소개서</label>
+                    <label>회사소개서</label>
                     <div class="file-upload">
-                        <input type="file" name="companyProfile" accept=".pdf,.doc,.docx" required>
+                        <input type="file" name="companyProfile" accept=".pdf,.doc,.docx">
                         <label for="companyProfile" class="file-upload-label">
-                            📎 파일 선택 (필수)
+                            📎 파일 선택 (선택)
                         </label>
                     </div>
                     <div class="file-list" id="fileList2"></div>
                 </div>
 
                 <div class="form-group">
-                    <label>기술보유 증빙자료</label>
+                    <label class="required">기술보유 증빙자료</label>
                     <div class="file-upload">
-                        <input type="file" name="technologyProof" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                        <input type="file" name="technologyProof" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
                         <label for="technologyProof" class="file-upload-label">
-                            📎 파일 선택 (선택)
+                            📎 파일 선택 (필수)
                         </label>
                     </div>
                     <div class="file-list" id="fileList3"></div>
-                </div>
-
-                <div class="form-group">
-                    <label>기타 첨부 자료</label>
-                    <div class="file-upload">
-                        <input type="file" name="otherFiles" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" multiple>
-                        <label for="otherFiles" class="file-upload-label">
-                            📎 파일 선택 (선택, 여러 개 가능)
-                        </label>
-                    </div>
-                    <div class="file-list" id="fileList4"></div>
                 </div>
             </div>
 
@@ -569,11 +197,11 @@
             <h2>AI협력업체 등록을 위한 개인정보 수집·이용 동의서</h2>
             <div class="agree-body">
                 <p>공단은 AI협력업체 등록을 위해 아래와 같이 개인정보를 수집·이용하고자 합니다. 내용을 자세히 읽으신 후 동의 여부를 결정하여 주시기 바랍니다.</p>
-                <p class="agree-item"><strong>1. 개인정보의 수집·이용 목적(필수)</strong> 민원사무 처리에 관한 법률 및 시행령, 공단 민원사무처리규정 제4조제5항에 의거하여 전자민원사무를 처리하는 업무</p>
-                <p class="agree-item"><strong>2. 수집 항목</strong> 필수항목 : 성명, 전화번호, 이메일</p>
-                <p class="agree-item"><strong>3. 개인정보의 보유 및 이용기간</strong> 협력업체 모집 완료 시까지 또는 내부업무 처리를 위하여 1년간 보유 후 삭제</p>
+                <p class="agree-item"><strong>1. 개인정보의 수집·이용 목적(필수)</strong><br>민원사무 처리에 관한 법률 및 시행령, 공단 민원사무처리규정 제4조제5항에 의거하여 <span class="agree-highlight">전자민원사무</span>를 처리하는 업무</p>
+                <p class="agree-item"><strong>2. 수집 항목</strong><br>필수항목 : <span class="agree-highlight">성명, 전화번호, 이메일</span></p>
+                <p class="agree-item"><strong>3. 개인정보의 보유 및 이용기간</strong><br>협력업체 모집 완료 시까지 또는 내부업무 처리를 위하여 <span class="agree-highlight">1년간</span> 보유 후 삭제</p>
                 <p class="agree-item"><strong>4. 동의를 거부할 권리가 있으며, 동의 거부 시 AI협력업체 등록이 불가하오니 양지하시기 바랍니다.</strong></p>
-                <p style="margin-top:1rem;">※ 위와 같이 개인정보(필수항목)를 수집·이용하는데 동의하십니까?</p>
+                <p style="margin-top:1rem;">※ 위와 같이 개인정보를 수집·이용하는데 동의하십니까?</p>
             </div>
             <div class="agree-checkbox-wrap">
                 <label><input type="checkbox" name="agreeChoice" id="agreeYes"> 동의함</label>
@@ -791,24 +419,20 @@
                 const formData = new FormData(this);
                 const cooperationFieldValues = Array.from(cooperationFields).map(field => field.value);
 
-                // 지원서 데이터 준비
+                // 지원서 데이터 준비 (DB NOT NULL 컬럼에는 빈 문자열 전달)
                 const applicationData = {
                     company_name: formData.get('companyName'),
-                    representative: formData.get('representative'),
+                    representative: formData.get('representative') || null,
                     business_number: formData.get('businessNumber'),
                     contact_person: formData.get('contactPerson'),
-                    position: formData.get('position'),
+                    position: formData.get('position') || null,
                     phone: formData.get('phone'),
                     email: formData.get('email'),
-                    address: formData.get('address'),
                     website: formData.get('website') || null,
                     cooperation_fields: cooperationFieldValues,
                     cooperation_detail: formData.get('cooperationDetail') || null,
                     company_overview: formData.get('companyOverview'),
-                    technology: formData.get('technology'),
-                    achievements: formData.get('achievements'),
-                    patents: formData.get('patents') || null,
-                    certifications: formData.get('certifications') || null
+                    technology: formData.get('technology')
                 };
 
                 // 1. 지원서 정보를 데이터베이스에 저장
@@ -834,25 +458,17 @@
                     fileUploadPromises.push(uploadFile(businessLicense, applicationId, 'businessLicense'));
                 }
 
-                // 회사소개서
+                // 회사소개서 (선택)
                 const companyProfile = formData.get('companyProfile');
                 if (companyProfile && companyProfile.size > 0) {
                     fileUploadPromises.push(uploadFile(companyProfile, applicationId, 'companyProfile'));
                 }
 
-                // 기술보유 증빙자료
+                // 기술보유 증빙자료 (필수)
                 const technologyProof = formData.get('technologyProof');
                 if (technologyProof && technologyProof.size > 0) {
                     fileUploadPromises.push(uploadFile(technologyProof, applicationId, 'technologyProof'));
                 }
-
-                // 기타 첨부 자료 (여러 개 가능)
-                const otherFiles = formData.getAll('otherFiles');
-                otherFiles.forEach(file => {
-                    if (file && file.size > 0) {
-                        fileUploadPromises.push(uploadFile(file, applicationId, 'otherFiles'));
-                    }
-                });
 
                 // 모든 파일 업로드 대기
                 await Promise.all(fileUploadPromises);
