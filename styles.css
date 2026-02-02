@@ -4,11 +4,14 @@
     box-sizing: border-box;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+
 body {
-    font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
     line-height: 1.6;
     color: #333;
     overflow-x: hidden;
+    font-weight: 400;
 }
 
 /* 헤더 */
@@ -58,6 +61,7 @@ nav {
     text-decoration: none;
     color: #333;
     font-weight: 500;
+    font-size: 0.95rem;
     transition: color 0.3s;
 }
 
@@ -67,7 +71,7 @@ nav {
 
 /* Hero 섹션 */
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #0082C9 100%);
+    background: linear-gradient(135deg, #0066B3 0%, #0082C9 50%, #0099E6 100%);
     color: white;
     padding: 300px 2rem 100px;
     text-align: center;
@@ -101,6 +105,8 @@ nav {
     font-size: 3.5rem;
     margin-bottom: 1.5rem;
     animation: fadeInUp 1s ease;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 .hero p {
@@ -108,6 +114,8 @@ nav {
     margin-bottom: 2rem;
     opacity: 0.95;
     animation: fadeInUp 1s ease 0.2s both;
+    font-weight: 400;
+    letter-spacing: -0.01em;
 }
 
 .cta-button {
@@ -142,6 +150,8 @@ section {
     color: #333;
     position: relative;
     padding-bottom: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 .section-title::after {
@@ -152,7 +162,7 @@ section {
     transform: translateX(-50%);
     width: 80px;
     height: 4px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
+    background: linear-gradient(90deg, #0066B3, #0082C9);
     border-radius: 2px;
 }
 
@@ -190,6 +200,8 @@ section {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     color: #0082C9;
+    font-weight: 600;
+    letter-spacing: -0.01em;
 }
 
 .overview-card p {
@@ -224,6 +236,8 @@ section {
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
     color: #333;
+    font-weight: 600;
+    letter-spacing: -0.01em;
 }
 
 .qual-item ul {
@@ -238,7 +252,7 @@ section {
 
 /* 지원 절차 */
 .process {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, #f5f7fa 0%, #e3f2fd 100%);
 }
 
 .process-steps {
@@ -261,7 +275,7 @@ section {
 .step-number {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #0066B3, #0082C9);
     color: white;
     border-radius: 50%;
     display: flex;
@@ -276,6 +290,8 @@ section {
     font-size: 1.3rem;
     margin-bottom: 1rem;
     color: #333;
+    font-weight: 600;
+    letter-spacing: -0.01em;
 }
 
 .process-step p {
@@ -285,7 +301,7 @@ section {
 
 /* 문의처 */
 .contact {
-    background: linear-gradient(135deg,#764ba2, #0082C9);
+    background: linear-gradient(135deg, #0066B3, #0082C9);
     color: white;
 }
 
@@ -314,6 +330,8 @@ section {
 .contact-card h4 {
     font-size: 1.3rem;
     margin-bottom: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
 }
 
 .contact-card p {
@@ -331,12 +349,58 @@ section {
     opacity: 0.8;
 }
 
+/* 고정 푸터 (지원서 작성) */
+.fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #00b7ff, #a4dcf1);
+    color: white;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.fixed-footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.fixed-footer-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.fixed-footer-button {
+    background: white;
+    color: #0082C9;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: inline-block;
+}
+
+.fixed-footer-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
 /* 푸터 */
 footer {
-    background: #54585A;
+    background: #2c3e50;
     color: white;
     text-align: center;
     padding: 2rem;
+    font-weight: 400;
 }
 
 /* 애니메이션 */
@@ -371,6 +435,16 @@ footer {
 
     .process-steps {
         grid-template-columns: 1fr;
+    }
+
+    .fixed-footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .fixed-footer-button {
+        width: 100%;
+        text-align: center;
     }
 }
 
