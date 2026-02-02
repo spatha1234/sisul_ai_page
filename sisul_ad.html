@@ -45,10 +45,15 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
         
-        .video-container video {
+        .video-container video,
+        .video-container iframe {
             width: 100%;
             height: auto;
             display: block;
+        }
+        .video-container iframe {
+            aspect-ratio: 16 / 9;
+            min-height: 400px;
         }
         
         /* 소개 섹션 */
@@ -313,10 +318,7 @@
         <h1>서울시설공단 AI 혁신</h1>
         <p>스마트 시티를 선도하는 서울시설공단의 AI 기술</p>
         <div class="video-container">
-            <video controls autoplay muted>
-                <source src="sisul_ad.mp4" type="video/mp4">
-                브라우저가 비디오 태그를 지원하지 않습니다.
-            </video>
+            <iframe src="https://www.youtube.com/embed/cN4UFPdf6xY?autoplay=1&mute=1" title="서울시설공단 AI 혁신" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </section>
 
