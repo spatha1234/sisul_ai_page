@@ -6,6 +6,13 @@
     <title>서울시설공단 AI협력업체 모집</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body { padding-bottom: 100px; }
+        .fixed-footer {
+            background: linear-gradient(135deg, #00b7ff, #a4dcf1);
+            padding: 1rem 1.5rem;
+        }
+    </style>
 </head>
 <body>
     <!-- 헤더 -->
@@ -30,7 +37,7 @@
         <div class="hero-content">
             <h1>AI협력업체 모집</h1>
             <p>서울시설공단과 함께 미래를 만들어갈 AI 협력업체를 모집합니다</p>
-            <a href="application.html" class="cta-button">자세히 보기</a>
+            <a href="sisul_ad.html" class="cta-button">자세히 보기</a>
         </div>
     </section>
 
@@ -139,6 +146,16 @@
         </div>
     </section>
 
+    <!-- 고정 푸터 -->
+    <div class="fixed-footer">
+        <div class="fixed-footer-content">
+            <div class="fixed-footer-text">
+                서울시설공단과 함께 AI 혁신에 동참하세요
+            </div>
+            <a href="application.html" class="fixed-footer-button">지원서 작성</a>
+        </div>
+    </div>
+
     <!-- 푸터 -->
     <footer>
         <p>&copy; 2026 서울시설공단. All rights reserved.</p>
@@ -146,5 +163,18 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // 지원서 작성: 팝업 없이 application.html로 바로 이동 (다른 핸들러 무시)
+        (function() {
+            var btn = document.querySelector('.fixed-footer-button[href="application.html"]');
+            if (btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    window.location.href = 'application.html';
+                }, true);
+            }
+        })();
+    </script>
 </body>
 </html>
