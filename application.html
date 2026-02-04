@@ -12,14 +12,13 @@
     <header>
         <nav>
             <div class="logo">
-                <a href="https://www.sisul.or.kr" target="_blank" rel="noopener noreferrer">
+                <a href="index.html" aria-label="메인으로">
                     <img src="logo.png" alt="서울시설공단">
                 </a>
             </div>
             <ul class="nav-links">
                 <li><a href="index.html#overview">모집개요</a></li>
-                <li><a href="index.html#qualifications">지원자격</a></li>
-                <li><a href="index.html#process">지원절차</a></li>
+                <li><a href="index.html#qualifications">지원자격·절차</a></li>
                 <li><a href="index.html#contact">문의처</a></li>
             </ul>
         </nav>
@@ -136,7 +135,7 @@
             <div class="form-section">
                 <h2>첨부 파일</h2>
                 <div class="info-box">
-                    <p>파일은 각각 10MB 이하로 업로드해주세요. (지원 형식: PDF, DOC, DOCX, JPG, PNG)</p>
+                    <p>파일은 각각 20MB 이하로 업로드해주세요. (지원 형식: PDF, DOC, DOCX, JPG, PNG)</p>
                 </div>
 
                 <div class="form-group">
@@ -187,14 +186,14 @@
             <div class="success-icon">✅</div>
             <h3>제출 완료!</h3>
             <p>지원서가 성공적으로 제출되었습니다.<br>검토 후 연락드리겠습니다.</p>
-            <button class="success-modal-button" onclick="closeSuccessModal()">확인</button>
+            <button class="success-modal-button" onclick="closeSuccessModal(); window.location.href='index.html';">확인</button>
         </div>
     </div>
 
     <!-- 개인정보 수집·이용 동의 팝업 -->
     <div class="agree-modal-overlay" id="agreeModal">
         <div class="agree-modal">
-            <h2>AI협력업체 등록을 위한 개인정보 수집·이용 동의서</h2>
+            <h2>개인정보 수집·이용 동의서</h2>
             <div class="agree-body">
                 <p>공단은 AI협력업체 등록을 위해 아래와 같이 개인정보를 수집·이용하고자 합니다. 내용을 자세히 읽으신 후 동의 여부를 결정하여 주시기 바랍니다.</p>
                 <p class="agree-item"><strong>1. 개인정보의 수집·이용 목적(필수)</strong><br>민원사무 처리에 관한 법률 및 시행령, 공단 민원사무처리규정 제4조제5항에 의거하여 <span class="agree-highlight">전자민원사무</span>를 처리하는 업무</p>
@@ -218,6 +217,7 @@
     <footer>
         <p>&copy; 2026 서울시설공단. All rights reserved.</p>
         <p>서울시설공단과 함께 더 나은 미래를 만들어갑니다.</p>
+        <p class="footer-flaticon">Designed by UIcons from www.flaticon.com</p>
     </footer>
 
     <!-- Supabase 클라이언트 라이브러리 -->
@@ -393,8 +393,8 @@
                 if (input.files && input.files.length > 0) {
                     for (let i = 0; i < input.files.length; i++) {
                         const fileSize = input.files[i].size / 1024 / 1024; // MB
-                        if (fileSize > 10) {
-                            alert(`${input.files[i].name} 파일이 10MB를 초과합니다.`);
+                        if (fileSize > 20) {
+                            alert(`${input.files[i].name} 파일이 20MB를 초과합니다.`);
                             hasError = true;
                         }
                     }
